@@ -1,0 +1,39 @@
+<md-dialog add-application-dialog>
+    <md-dialog-content>
+        <h2 class="md-title">აპლიკაციის დამატება</h2>
+
+        <p ng-if="errorText" class="md-warn" layout="row" layout-align="start center">
+            <i class="material-icons">error_outline</i>
+            <span>&nbsp;{{errorText}}</span>
+        </p>
+
+        <form name="form" ng-submit="submit()">
+            <div layout="row" class="input-row">
+                <md-input-container flex>
+                    <label>აპლიკაციის ID</label>
+                    <input name="applicationId" ng-model="formData.applicationId" required>
+                </md-input-container>
+                <md-input-container flex>
+                    <label>კოდი</label>
+                    <input name="code" ng-model="formData.code" ng-pattern="/^\d{2}$/" required>
+                </md-input-container>
+            </div>
+            <div layout="row" class="input-row">
+                <md-input-container flex>
+                    <label>დასახელბა</label>
+                    <input name="name" ng-model="formData.name" required>
+                </md-input-container>
+            </div>
+            <div layout="row" class="input-row">
+                <md-input-container flex>
+                    <label>აღწერა</label>
+                    <textarea name="description" ng-model="formData.description" required></textarea>
+                </md-input-container>
+            </div>
+        </form>
+    </md-dialog-content>
+    <div class="md-actions">
+        <md-button class="md-primary" ng-click="submit()" ng-disabled="form.$invalid">დამატება</md-button>
+        <md-button class="md-primary" ng-click="cancel()">გაუქმება</md-button>
+    </div>
+</md-dialog>

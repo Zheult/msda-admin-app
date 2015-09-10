@@ -1,0 +1,56 @@
+<md-data-table-toolbar ng-hide="selected.length || filter.show">
+    <es-application-select></es-application-select>
+    <md-button class="md-icon-button" style="margin-right: 0;" ng-click="addApplication($event)" hide-sm>
+        <i class="material-icons md-dark">add</i>
+    </md-button>
+    <md-button class="md-icon-button" style="margin-left: 0;" ng-click="filter.show = true" hide-sm>
+        <i class="material-icons md-dark">filter_list</i>
+    </md-button>
+    <md-checkbox aria-label="Auto-generated rows" ng-model="showEmpty" class="md-primary">
+        <md-tooltip>
+            Show auto-generated rows
+        </md-tooltip>
+    </md-checkbox>
+    <div flex hide-sm></div>
+    <md-button class="md-icon-button" ng-click="addError($event)" hide-sm>
+        <i class="material-icons md-dark">add</i>
+    </md-button>
+</md-data-table-toolbar>
+
+<md-data-table-toolbar ng-show="filter.show && !selected.length">
+    <i class="material-icons md-dark">search</i>
+    <form flex name="filter.form">
+        <input type="text" ng-model="query.filter" ng-model-options="filter.options" placeholder="ძებნა">
+    </form>
+    <md-button class="md-icon-button" ng-click="removeFilter()">
+        <i class="material-icons md-dark">close</i>
+    </md-button>
+</md-data-table-toolbar>
+
+<md-data-table-toolbar class="alternate" ng-show="selected.length" layout-align="space-between">
+    <div>არჩეულია {{selected.length}} {{selected.length > 1 ? 'ჩანაწერი' : 'ჩანაწერი'}}</div>
+    <md-button class="md-icon-button" ng-click="removeError($event)">
+        <i class="material-icons md-dark">delete</i>
+    </md-button>
+</md-data-table-toolbar>
+
+<md-data-table-container>
+    <table md-data-table md-row-select="selected" md-progress="deferred">
+        <thead>
+        <tr>
+            <th name="Code" width="5%" numeric></th>
+            <th name="Keyword" width="25%"></th>
+            <th name="Message" width="70%"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr md-auto-select ng-repeat="error in errorList">
+            <td>{{error.code}}</td>
+            <td class="table__cell--ellipsis" title="{{error.keyword}}"><span>{{error.keyword}}</span></td>
+            <td class="table__cell--ellipsis" title="{{error.message}}"><span>{{error.message}}</span></td>
+        </tr>
+        </tbody>
+    </table>
+</md-data-table-container>
+
+<!--<md-data-table-pagination md-limit="query.limit" md-page="query.page" md-total="{{errorList.length}}" md-trigger="onPaginationChange"></md-data-table-pagination>-->

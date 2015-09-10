@@ -1,0 +1,14 @@
+<md-dialog add-error-dialog>
+    <md-dialog-content>
+        <h2 class="md-title">შეცდომის წაშლა</h2>
+
+        <p ng-if="errorText" class="md-warn" layout="row" layout-align="start center">
+            <i class="material-icons">error_outline</i>
+            <span>&nbsp;{{errorText}}</span>
+        </p>
+    </md-dialog-content>
+    <div class="md-actions">
+        <md-button class="md-primary" ng-click="submit()" ng-disabled="form.$invalid">წაშლა</md-button>
+        <md-button class="md-primary" ng-click="cancel()">გაუქმება</md-button>
+    </div>
+</md-dialog>
