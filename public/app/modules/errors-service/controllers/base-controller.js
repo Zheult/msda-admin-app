@@ -3,9 +3,10 @@ angular.module('msda')
         $scope.applications = [];
 
         $scope.getApplications = function () {
-            ErrorsService_application.query().then(function (response) {
-                $scope.applications = response.data;
-            });
+            ErrorsService_application.$query()
+                .then(function (response) {
+                    $scope.applications = response.data;
+                });
         };
 
         // Initialization

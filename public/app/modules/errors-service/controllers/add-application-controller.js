@@ -8,13 +8,15 @@ angular.module('msda')
 
             if ($scope.form.$valid) {
                 var application = angular.extend({}, $scope.formData, {errorList: []});
-                ErrorsService_application.add(application).then(function () {
-                    $scope.formData = {};
-                    $scope.errorText = '';
-                    $mdDialog.hide(application);
-                }, function (response) {
-                    $scope.errorText = response.data.message;
-                });
+
+                ErrorsService_application.$add(application)
+                    .then(function () {
+                        $scope.formData = {};
+                        $scope.errorText = '';
+                        $mdDialog.hide(application);
+                    }, function (response) {
+                        $scope.errorText = response.data.message;
+                    });
             }
         };
 

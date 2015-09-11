@@ -4,14 +4,13 @@ var hrh = require('msda-http-request-helper');
 
 var requestHelper = new hrh({
     host: '192.168.23.156',
-    port: 8080,
+    port: 3120,
     path: '/api/'
 });
 
-// GET /ErrorsService/Applications
-router.get('/ErrorsService/Applications', function (req, res, next) {
-    var requestData = {};
-    requestHelper.request('GetAllApplications', requestData, function (error, response) {
+// GET /errors-service/applications
+router.get('/errors-service/applications', function (req, res, next) {
+    requestHelper.request('GetAllApplications', {}, function (error, response) {
         if (error) {
             next(error);
         } else {
@@ -19,9 +18,8 @@ router.get('/ErrorsService/Applications', function (req, res, next) {
         }
     });
 });
-
-// GET /ErrorsService/Applications/applicationId
-router.get('/ErrorsService/Applications/:applicationId', function (req, res, next) {
+// GET /errors-service/applications/{applicationId}
+router.get('/errors-service/applications/:applicationId', function (req, res, next) {
     var requestData = {
         applicationId: req.params.applicationId
     };
@@ -33,9 +31,8 @@ router.get('/ErrorsService/Applications/:applicationId', function (req, res, nex
         }
     });
 });
-
-// POST /ErrorsService/Applications
-router.post('/ErrorsService/Applications', function (req, res, next) {
+// POST /errors-service/applications
+router.post('/errors-service/applications', function (req, res, next) {
     var body = req.body;
     var requestData = {
         applicationId: body.applicationId,
@@ -53,12 +50,11 @@ router.post('/ErrorsService/Applications', function (req, res, next) {
     });
 });
 
-// POST /ErrorsService/Errors
-router.post('/ErrorsService/Errors', function (req, res, next) {
-    var body = req.body;
+// POST /errors-service/applications/{applicationId}/errors
+router.post('/errors-service/applications/:applicationId/errors', function (req, res, next) {
     var requestData = {
-        applicationId: body.applicationId,
-        error: body.error
+        applicationId: req.params.applicationId,
+        error: req.body.error
     };
     requestHelper.request('AddToErrorList', requestData, function (error, response) {
         if (error) {
@@ -68,13 +64,11 @@ router.post('/ErrorsService/Errors', function (req, res, next) {
         }
     });
 });
-
-// PUT /ErrorsService/Errors
-router.put('/ErrorsService/Errors', function (req, res, next) {
-    var body = req.body;
+// PUT /errors-service/applications/{applicationId}/errors
+router.put('/errors-service/applications/:applicationId/errors', function (req, res, next) {
     var requestData = {
-        applicationId: body.applicationId,
-        error: body.error
+        applicationId: req.params.applicationId,
+        error: req.body.error
     };
     requestHelper.request('UpdateErrorList', requestData, function (error, response) {
         if (error) {
@@ -84,13 +78,11 @@ router.put('/ErrorsService/Errors', function (req, res, next) {
         }
     });
 });
-
-// DELETE /ErrorsService/Errors/applicationId/errorCode
-router.delete('/ErrorsService/Errors/:applicationId/:errorCode', function (req, res, next) {
-    var params = req.params;
+// DELETE /errors-service/applications/{applicationId}/errors
+router.delete('/errors-service/applications/:applicationId/errors', function (req, res, next) {
     var requestData = {
-        applicationId: params.applicationId,
-        error: {code: params.errorCode}
+        applicationId: req.params.applicationId,
+        error: {code: req.query.code}
     };
     requestHelper.request('RemoveFromErrorList', requestData, function (error, response) {
         if (error) {

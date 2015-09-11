@@ -1,5 +1,5 @@
 angular.module('msda')
-    .controller('ErrorsService_tableCtrl', function ($scope, $http, $mdDialog, ErrorsService_application, ErrorsService_error) {
+    .controller('ErrorsService_tableCtrl', function ($scope, $http, $mdDialog, ErrorsService_application) {
         var $parent = $scope.$parent;
 
         $scope.application = {};
@@ -58,13 +58,13 @@ angular.module('msda')
                 });
             },
 
-            removeError: function (event) {
+            deleteError: function (event) {
                 $mdDialog.show({
                     //clickOutsideToClose: true,
-                    controller: 'ErrorsService_removeErrorCtrl',
+                    controller: 'ErrorsService_deleteErrorCtrl',
                     focusOnOpen: false,
                     targetEvent: event,
-                    templateUrl: 'app/modules/errors-service/views/partials/table-remove-error-dialog.html',
+                    templateUrl: 'app/modules/errors-service/views/partials/table-delete-error-dialog.html',
                     locals: {
                         applicationId: $scope.application.applicationId,
                         errorList: $scope.selected
@@ -78,7 +78,7 @@ angular.module('msda')
         var loadErrors = function () {
             if (typeof $scope.application.applicationId === 'undefined') return;
 
-            $scope.deferred = ErrorsService_application.get($scope.application.applicationId)
+            $scope.deferred = ErrorsService_application.$get($scope.application.applicationId)
                 .then(function (response) {
                     var errorList = angular.copy(response.data.errorsList); // TODO: errorsList -> errorList
                     if (errorList.length) {

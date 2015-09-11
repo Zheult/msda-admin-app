@@ -16,10 +16,10 @@
   "dependencies": {
     "angular": "1.4.5",
     "angular-material": "0.10.1",
-    "angular-material-data-table": "~0.8.11",
+    "angular-material-data-table": "0.8.11",
     "angular-ui-router": "0.2.15",
     "jquery": "2.1.4",
-    "material-design-icons": "~2.0.0",
+    "material-design-icons": "2.0.0",
     "select2": "4.0.0",
     "sprintf": "1.0.3"
   }
