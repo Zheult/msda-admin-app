@@ -3,7 +3,7 @@ var router = express.Router();
 var hrh = require('msda-http-request-helper');
 
 var requestHelper = new hrh({
-    host: '192.168.23.156',
+    host: 'bl.msda.ge',
     port: 3120,
     path: '/api/'
 });
