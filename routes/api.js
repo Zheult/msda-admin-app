@@ -1,12 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var config = require('../configs/default');
 var hrh = require('msda-http-request-helper');
 
-var requestHelper = new hrh({
-    host: 'bl.msda.ge',
-    port: 3120,
-    path: '/api/'
-});
+var requestHelper = new hrh(config.errorsService);
 
 // GET /errors-service/applications
 router.get('/errors-service/applications', function (req, res, next) {
